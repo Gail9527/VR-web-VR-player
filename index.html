@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>VR-player</title>
+	<meta charset='utf-8' >
+	<meta name='viewport' content='width=device-width, initial-scale=1.0 maximum-scale=1.0, user-scalable=No' >
+	<meta name="mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-capable" content="yes"> 
+	<link href='Css/style_small.css' rel='stylesheet' type='text/css' media='screen and (max-width: 499px)' >
+	<link href='Css/style_medium.css' rel='stylesheet' type='text/css' media='screen and (min-width: 500px) and (max-width: 900px)' >
+	<link href='Css/style_large.css' rel='stylesheet' type='text/css' media='screen and (min-width: 901px)' >
+	<script type="text/javascript" src="Scripts/jquery-3.1.0.min.js"></script>
+	<!--[if lt IE 9]><script src="Scripts/css3-mediaqueries.js"></script><![endif]-->
+	<script>var WebVRConfig = {DEFER_INITIALIZATION: true,DIRTY_SUBMIT_FRAME_BINDINGS: true,BUFFER_SCALE: 0.5,}</script>
+	<script type="text/javascript" src="Scripts/webvr-polyfill.js"></script>
+	<script>InitializeWebVRPolyfill();</script>
+	<script type="text/javascript" src="Scripts/gl-matrix-min.js"></script>
+	<script type="text/javascript" src="Scripts/goodav-vrplayer-release.js"></script>
+</head>
+<body>
+	<!-- Movie player -->   
+	<div id='wrap' class='video_frame' style="margin: 0 auto; margin-top:14px; width:700px; height:500px;">
+	    <canvas id='webgl-canvas'></canvas>
+	    <script>player = new GoodavVrPlayer(document.getElementById("wrap"), document.getElementById("webgl-canvas"), "videos/2.mp4");</script>
+	</div>       
+	<script type='text/javascript'>
+	$(window).resize(function() {videoFrameResize();});
+	videoFrameResize();	
+	function videoFrameResize() {
+		vfs = document.getElementsByClassName('video_frame');
+		if(document.body.clientWidth < 500) {
+			for(var i = 0; i < vfs.length; ++i) {
+				vfs[i].style.width = "94%";
+				vfs[i].style.height = "300px";
+			}
+		} else if(document.body.clientWidth < 900) {
+			for(var i = 0; i < vfs.length; ++i) {
+				vfs[i].style.visibilty = "visible";
+				vfs[i].parentNode.visibilty = "visible";
+				vfs[i].style.width = "450px";
+				vfs[i].style.height = "300px";
+			}
+		} else {
+			for(var i = 0; i < vfs.length; ++i) {
+				vfs[i].style.visibilty = "visible";
+				vfs[i].parentNode.visibilty = "visible";
+				vfs[i].style.width = "700px";
+				vfs[i].style.height = "500px";
+			}
+		}
+	}</script>                               	
+	</div>
+</body>
+</html>
